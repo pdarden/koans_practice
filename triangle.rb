@@ -14,12 +14,12 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  if a == b && b == c
-    return :equilateral
-  elsif a == b || b == c || c == a
-    return :isosceles
-  else
-    return :scalene
+  raise TriangleError, "All side must be positive!" if a <= 0 || b <= 0 || c <= 0
+  raise TriangleError, "This can't be a triangle!" if ((a + b + c) - (2 * [a, b, c].max)) <= 0
+  case [a, b, c].uniq.size
+  when 3; :scalene
+  when 2; :isosceles
+  when 1; :equilateral
   end
 end
 
